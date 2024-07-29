@@ -14,7 +14,9 @@ const ShoppingCart = () => {
 
   const removeProduct = (id: number) => {
     const updatedProducts = products.filter((product) => product.id !== id);
-    localStorage.setItem("cards", JSON.stringify(updatedProducts));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cards", JSON.stringify(updatedProducts));
+    }
     setProducts(updatedProducts);
   };
 
@@ -22,7 +24,9 @@ const ShoppingCart = () => {
     const updatedProduct = products.find((product) => product.id === id);
     if (updatedProduct?.quantity) {
       updatedProduct.quantity++;
-      localStorage.setItem("cards", JSON.stringify(products));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("cards", JSON.stringify(products));
+      }
       setProducts([...products]);
     }
   };
@@ -31,7 +35,9 @@ const ShoppingCart = () => {
     const updatedProduct = products.find((product) => product.id === id);
     if (updatedProduct?.quantity && updatedProduct.quantity > 1) {
       updatedProduct.quantity--;
-      localStorage.setItem("cards", JSON.stringify(products));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("cards", JSON.stringify(products));
+      }
       setProducts([...products]);
     }
   };
